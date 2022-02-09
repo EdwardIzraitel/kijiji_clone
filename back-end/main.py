@@ -1,7 +1,18 @@
+from multiprocessing import dummy
 from urllib import response
 from fastapi import FastAPI, HTTPException
-from model import Post
+from model import Post, LoginItem
 from fastapi.middleware.cors import CORSMiddleware
+import jwt
+from fastapi.encoders import jsonable_encoder
+
+SECRET_KEY = 'my_secret_key'
+ALGORITHM = 'HS256'
+
+dummy_user = {
+    "username": "ed",
+    "password": "edpassword"
+}
 
 from database import (
     fetch_post,
@@ -56,4 +67,13 @@ async def delete_post(id):
     if response:
         return "Successfully deleted post"
     raise HTTPException(404,"No post with {id} to delete")
-    
+
+@app.post("/login")
+def user_login(loginItem: LoginItem):
+    data = jsonable_encoder(loginItem)
+
+    if data['username'] == dummy_user['username'] and data['password'] == dummy_user['password']:
+        encoded_jwt = jwt.encode(data, SECRET_KEY, algorithm=ALGORITHM)
+        return {"token": encoded_jwt}
+    else:
+        return {"message": "login failed"}
