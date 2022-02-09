@@ -13,9 +13,6 @@ import Postings from './screens/Postings';
 import { RequireToken } from './Auth';
 
 
-export default function App(){
-  return(
-
 export default function App() {
   return (
     <BrowserRouter>

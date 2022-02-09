@@ -69,8 +69,6 @@ async def delete_post(id):
         return "Successfully deleted post"
     raise HTTPException(404,"No post with {id} to delete")
 
-if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", reload=True, port=8888)
 @app.post("/login")
 def user_login(loginItem: LoginItem):
     data = jsonable_encoder(loginItem)
@@ -80,3 +78,6 @@ def user_login(loginItem: LoginItem):
         return {"token": encoded_jwt}
     else:
         return {"message": "login failed"}
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", reload=True, port=8888)
