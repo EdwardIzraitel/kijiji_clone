@@ -1,7 +1,11 @@
+from re import S
 from pydantic import BaseModel
 
 class Post(BaseModel):
-    _id: int
     title: str
     # description: str
     # price: float
+
+class LoginItem(BaseModel):
+    username: str
+    password: str

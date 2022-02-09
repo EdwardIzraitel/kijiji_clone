@@ -15,7 +15,7 @@ collection = database.post
 
 
 async def fetch_post(title):
-    document = await collection.find_one({"_id": title})  # {"title": title})
+    document = await collection.find_one({"title":title})
     return document
 
 
@@ -43,5 +43,6 @@ async def update_post(id, title):
 async def remove_post(id):
     document = await collection.find_one({"id": id})
     print(document)
-    await collection.delete_one({"id": id})
+    await collection.delete_one({"id":id})
     return True
+
