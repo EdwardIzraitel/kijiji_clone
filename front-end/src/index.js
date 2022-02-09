@@ -13,9 +13,8 @@ import Postings from './screens/Postings';
 import { RequireToken } from './Auth';
 
 
-export default function App(){
-  return(
-
+export default function App() {
+  return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login/>}/>
@@ -24,7 +23,6 @@ export default function App(){
         <Route path="post/:title" element={<Postings/>}/>
       </Routes>
     </BrowserRouter>
-  )
-  
+  );
 }
 ReactDOM.render(<App />, document.getElementById("root"));
