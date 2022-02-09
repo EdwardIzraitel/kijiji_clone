@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  nginx:
+      image: nginx:1.17
+      volumes:
+        - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+        - 8000:80
+      depends_on:
+        - backend
+        - frontend
+  backend:
+    build: back-end
+    command: python app/main.py
+    volumes:
+      - ./back-end:/app/:cached
+      - ./.docker/.ipython:/root/.ipython:cached
+    environment:
+      PYTHONPATH: .
+  frontend: 
+    build: front-end
+    volumes:
+      - './front-end:/app:cached'
+      - './front-end/node_modules:/app/node_modules:cached'
+    environment:
+      - NODE_ENV=development

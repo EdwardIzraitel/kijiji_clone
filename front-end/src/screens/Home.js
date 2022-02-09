@@ -10,7 +10,7 @@ function Home() {
   const [posts, setPosts] = useState([{}])
     
   useEffect(()=>{
-    axios.get('http://localhost:8000/api/posts')
+    axios.get('http://localhost:8888/api/posts')
     .then(res=>{
       setPosts(res.data)
     })
