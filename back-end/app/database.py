@@ -1,48 +1,70 @@
 import asyncio
 import motor.core
+from pymongo import MongoClient
+from model import Post, User
+from schemas.post_schema import posts_serializer
 
-from motor.motor_asyncio import (
-    AsyncIOMotorClient as MotorClient,
-)
-from model import Post
-
-
-client = MotorClient(
-    'mongodb://root:example@mongo:27017')
-client.get_io_loop = asyncio.get_running_loop
+client = MongoClient('mongodb://root:example@mongo:27017')
+# client = MotorClient(
+#     'mongodb://root:example@mongo:27017')
+# client.get_io_loop = asyncio.get_running_loop
 database = client.Postings
-collection = database.post
+collection = database["post"]
+collection_user = database["users"]
 
+#==============USERS
+def find_user(username:str):
+    document = collection_user.find_one({"username":username})
+    return document
 
-async def fetch_post(title):
-    document = await collection.find_one({"title":title})
+def create_user(user):
+    userExist = find_user(user.username)
+    if userExist==None:
+        result = collection_user.insert_one({"username":user.username,"password":user.password})
+        return user
+    return None
+    
+#Commented code for testing
+# def fetch_all_users():
+#     users = []
+#     cursor = collection_user.find()
+
+#     for document in cursor:
+#         users.append(User(**document))
+#     return users
+
+# def remove_user(username:str):
+#     doc = collection_user.delete_one({"username":username})
+#     return doc
+
+#=================POSTS
+def fetch_post(title):
+    document =collection.find_one({"title":title})
     return document
 
 
-async def fetch_all_posts():
-
-    posts = []
-    cursor = collection.find({})
-    async for document in cursor:
-        posts.append(Post(**document))
+def fetch_all_posts():
+    posts = (posts_serializer(collection.find()))
     return posts
 
 
-async def create_post(post):
-    document = post
-    result = await collection.insert_one(document)
+def create_post(titleStr:str,descStr:str,prc:int,username:str,url:str):
+    user = find_user(username)
+    if user!=None:
+        result = collection.insert_one({"title":titleStr,"desc":descStr,"price":prc,"user":username,"imgURL":url})
+        return result
+    return None
+
+def update_post(id,imgURL):
+    res = collection.update_one({"_id": id}, {"$set": {"imgURL": imgURL}})
+    document = collection.find_one({"_id": id})
     return document
 
 
-async def update_post(id, title):
-    await collection.update_one({"id": id}, {"$set": {"title": title}})
-    document = await collection.find_one({"id": id})
-    return document
-
-
-async def remove_post(id):
-    document = await collection.find_one({"id": id})
-    print(document)
-    await collection.delete_one({"id":id})
-    return True
+def remove_post(id):
+    document = collection.find_one({"_id": id})
+    if document:
+        collection.delete_one({"_id":id})
+        return True
+    return False
 

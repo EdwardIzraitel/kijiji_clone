@@ -3,31 +3,54 @@ import styled from 'styled-components'
 import Posting from '../props/HomePosting'
 import Grid from '@material-ui/core/Grid'
 import axios from 'axios';
-import SearchBar from '../components/SearchBar'
+import { useDispatch, useSelector } from 'react-redux'
+import {selectFilter, changeFilter} from '../features/filterSlicer'
+import { SpinnerCircular } from 'spinners-react';
 
 function Home() {
-
   const [posts, setPosts] = useState([{}])
-    
+  const filterPosts = useSelector(selectFilter)
+  const [isLoading, cLoading] = useState(true)
+  const dispatch = useDispatch()
+
   useEffect(()=>{
-    axios.get('http://localhost:8888/api/posts')
+    axios.get('http://localhost:8000/api/posts')
     .then(res=>{
       setPosts(res.data)
+      cLoading(false)
     })
   },[])
 
+  useEffect(()=>{
+    if(filterPosts =='')
+      dispatch(changeFilter({filter:''}))
+  },[])
+
+  const PostingComponent =() => {
+      let filtered = posts.filter(obj => obj.title.toLowerCase().includes(filterPosts.filter.toLowerCase()))
+      return(
+        (filtered.length!=0)?
+        <Grid style={{ display: 'flex', justifyContent:'center'}} container spacing={3}>
+        {filtered.map((post)=>
+                <Grid item xs={4} key={post.id}>
+                    <Posting pst={post}/>
+                </Grid>
+        )}
+        </Grid>
+      :<Text>No posts with title {filterPosts.filter}</Text>)
+}
+
   return (
   <Background>
-    <SearchBar/>
-    <PostingWrapper>
-    <Grid style={{display: 'flex', justifyContent: 'center'}} container spacing={4}> 
-    {posts.map((post)=>
-      <Grid item sm={4}>
-          <Posting Title={post.title} id={post.id}/>
-      </Grid>    
-    )}
-      </Grid>
-    </PostingWrapper>
+    {
+      (isLoading)?
+      <SpinnerCircular size="200" style={{marginLeft:"auto", marginRight:"auto"}}/>:
+        <PostingWrapper>
+        <PostingComponent/>
+        </PostingWrapper>
+
+    }
+    
   </Background>
   );
 }
@@ -41,11 +64,14 @@ display: flex;
 flex-direction: column;
 font-size: calc(10px + 2vmin);
 `
-
+const Text= styled.p`
+font-size: 20px;
+color:white;
+text-align:center;
+`
 const PostingWrapper = styled.section`
-align-self: center;
+margin-left:auto;
+margin-right:auto;
 margin-top:20px;
-padding: 20px;
-min-width: max(50%,50vh);
-border: 1px solid red;
+min-width:min(80%,100vh);
 `

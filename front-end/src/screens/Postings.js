@@ -1,30 +1,53 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useLocation } from "react-router-dom";
-import SearchBar from '../components/SearchBar'
+
 function Postings() {
   const prop = useLocation()
   return (
   <Background>
-    <SearchBar/>
-    <Text>{prop.state.title}</Text>
-
+    <Image src ={prop.state.img}  />
+    <TextContainer>
+      <TitleBox>
+        <Text>{prop.state.prop.title}</Text>
+        <Text>{prop.state.prop.price} $</Text>
+      </TitleBox>
+      <Text>Description:</Text>
+      <Text>{prop.state.prop.desc}</Text>
+      <Text style={{marginTop:"100px"}}>Posted by: {prop.state.prop.user}</Text>
+    </TextContainer>
   </Background>
   );
 }
 
 export default Postings
 
+const Image = styled.img`
+width: 300px;
+height:300px;
+margin-left:auto;
+margin-right:auto;
+`
+
 const Background = styled.section`
 background-color: #282c34;
 min-height: 100vh;
 display: flex;
 flex-direction: column;
-// align-items:center;
 font-size: calc(10px + 2vmin);
+`
+const TitleBox = styled.section`
+display: flex;
+flex-direction: row;
+justify-content:space-between;
+`
+
+const TextContainer = styled.section`
+margin-left:auto;
+margin-right:auto;
+min-width: max(30%,40vh)
 `
 
 const Text = styled.p`
 color:white;
-text-align:center;
 `;

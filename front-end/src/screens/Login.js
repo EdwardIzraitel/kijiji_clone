@@ -1,32 +1,45 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {TextField} from '@material-ui/core'
 import styled from 'styled-components'
 import axios from 'axios'
-import { setToken } from '../Auth'
+import { setToken, setUser } from '../Auth'
 import { useNavigate } from "react-router-dom";
-
+import { useAlert } from 'react-alert'
 
 
 function Login() {
     const [username, changeUsername] = useState('')
     const [password, changePassword] = useState('')
+    // const [error, changeError] = useState('')
     let navigate = useNavigate();
+    const alert = useAlert()
+
+    useEffect(()=>{
+        localStorage.removeItem('edToken')
+        localStorage.removeItem('user')
+    },[])
+
     const login = () => {
-        if(username == '' && password == ''){
+        if(username === '' && password === ''){
             return
         }
         else{
-            axios.post('http://localhost:8000/login',{
+            axios.post('http://localhost:8000/api/login',{
                 username: username,
                 password: password
             })
             .then(res =>{
                 setToken(res.data.token)
-                navigate('/profile')
+                setUser(username)
+                navigate('/')
             })
-            .catch()
+            .catch(e=>{
+                alert.show('Username or password is wrong')
+                // changeError(e.response.data.detail)
+            })
         }
     }
+
   return (
   <Background>
       <Text>Login</Text>
@@ -41,6 +54,7 @@ function Login() {
             id="password"
             label="Password"
             value={password}
+            type="password"
             onChange={(e)=> changePassword(e.target.value)}
         />
         <Button onClick={login}>Submit</Button>

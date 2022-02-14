@@ -1,13 +1,21 @@
-import React, {useState} from 'react'
+import React from 'react'
 import styled from 'styled-components'
-
-
+import { useNavigate } from "react-router-dom";
+import { fetchUser } from '../Auth';
 
 function Profile() {
+  const navigate = useNavigate()
 
+  const logout=()=>{
+    localStorage.removeItem('edToken')
+    localStorage.removeItem('user')
+    navigate('/')
+  }
   return (
   <Background>
       <Text>Profile</Text>
+      <Text>{fetchUser()}</Text>
+      <Text onClick={logout}>Logout</Text>
   </Background>
   );
 }
