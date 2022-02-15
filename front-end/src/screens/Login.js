@@ -24,7 +24,7 @@ function Login() {
             return
         }
         else{
-            axios.post('http://localhost:8000/api/login',{
+            axios.post('http://ec2-3-96-193-149.ca-central-1.compute.amazonaws.com/api/login',{
                 username: username,
                 password: password
             })

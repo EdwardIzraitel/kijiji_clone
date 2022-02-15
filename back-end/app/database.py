@@ -68,3 +68,9 @@ def remove_post(id):
         return True
     return False
 
+def remove_post_by_title(title):
+    document = collection.find_one({"title": title})
+    if document:
+        collection.delete_one({"title":title})
+        return True
+    return False

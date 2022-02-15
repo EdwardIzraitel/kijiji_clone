@@ -29,6 +29,7 @@ from database import (
     create_post,
     update_post,
     remove_post,
+    remove_post_by_title,
     find_user,
     create_user,
 )
@@ -44,6 +45,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/api/getCred")
+def get_cred():
+    print(os.getenv("AWS_ACCESS_KEY"))
+    return ""
 
 @app.get("/api/posts")
 async def get_posts():
@@ -71,12 +77,12 @@ def upload_post(image:UploadFile = Form(...),title:str = Form(...),desc:str=Form
         
     
 
-# @app.delete("/api/post{title}")
-# async def delete_post(title):
-#     response =remove_post(title)
-#     if response:
-#         return "Successfully deleted post"
-#     raise HTTPException(404,"No post with {title} to delete")
+@app.delete("/api/post{title}")
+async def delete_post(title):
+     response =remove_post_by_title(title)
+     if response:
+         return "Successfully deleted post"
+     raise HTTPException(404,"No post with {title} to delete")
 
 #========USERS=====
 # @app.get("/api/login")

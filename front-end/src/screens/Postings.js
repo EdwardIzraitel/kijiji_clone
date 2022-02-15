@@ -45,7 +45,9 @@ justify-content:space-between;
 const TextContainer = styled.section`
 margin-left:auto;
 margin-right:auto;
-min-width: max(30%,40vh)
+width:30%;
+white-space: normal;
+word-break:break-all;
 `
 
 const Text = styled.p`

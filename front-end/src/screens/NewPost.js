@@ -72,7 +72,7 @@ function NewPost() {
             formData.append('username', fetchUser())
             axios({
                 method: "post",
-                url: "http://localhost:8000/api/newPost",
+                url: "http://ec2-3-96-193-149.ca-central-1.compute.amazonaws.com/api/newPost",
                 data: formData,
                 headers: { "Content-Type": "multipart/form-data" },
             })
