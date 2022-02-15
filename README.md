@@ -1,7 +1,7 @@
 ## kijiji_clone
  
 To run this app locally please run: docker compose up --build  
-Note that .env file is not included so running locally will not allow for queries   
+Note that .env file is not included, follow .env.example in /back-end for format  
 Head to http://ec2-3-96-193-149.ca-central-1.compute.amazonaws.com/ to use.  
 
 Test account:  
