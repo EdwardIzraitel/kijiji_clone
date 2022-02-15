@@ -10,8 +10,14 @@ AWS_SECRET_KEY
 SECRET_KEY  
 ALGORITHM  
 
+Test account:  
+testaccount  
+123456789  
+
 ## Technologies used:
-- Utilized React for client display
-- FastAPI for server side queries
+- Utilized React for client interface
+- FastAPI for server side queries, and user authentication
 - MongoDB for database storage (users, and posts)
+- Using docker to containerize the application for easy development and deployment
 - Amazon S3 for image storage (post images)
+- Deployed on AWS ec2 instance
