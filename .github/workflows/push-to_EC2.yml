@@ -9,7 +9,9 @@ jobs:
 
     steps:
       - name: Testing key
-        run: echo "${{ secrets.TEST_KEY }}"
+        env:
+        SUPER_SECRET: ${{ secrets.TEST_KEY }}
+        run: echo "$SUPER_SECRET"
       - name: Checkout the code
         uses: actions/checkout@v1
 
