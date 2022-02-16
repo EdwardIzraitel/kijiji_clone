@@ -8,12 +8,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Testing key
+        run: echo "{{ $secrets.TEST_KEY }}"
       - name: Checkout the code
         uses: actions/checkout@v1
 
       - name: Deploy to my EC2 instance
         uses: easingthemes/ssh-deploy@v2.1.5
-        run: echo "{{ $secrets.TEST_KEY }}"
         env:
           SSH_PRIVATE_KEY : ${{ secrets.SSH_KEY }}
           REMOTE_HOST: "ec2-3-96-193-149.ca-central-1.compute.amazonaws.com"
