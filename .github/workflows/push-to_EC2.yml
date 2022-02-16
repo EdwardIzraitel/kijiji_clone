@@ -14,7 +14,7 @@ jobs:
       - name: Deploy to my EC2 instance
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
-          SSH_PRIVATE_KEY : ${{ secrets.SSH_KEY}}
+          SSH_PRIVATE_KEY : ${{ secrets.SSH_KEY }}
           REMOTE_HOST: "ec2-3-96-193-149.ca-central-1.compute.amazonaws.com"
           REMOTE_USER: "ubuntu"
           TARGET: "/kijiji_clone"
