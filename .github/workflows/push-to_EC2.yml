@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      run: echo ${{ secrets.TEST_KEY }}
       - name: Checkout the code
         uses: actions/checkout@v1
 
