@@ -29,6 +29,4 @@ jobs:
       host: ${{ secrets.HOST_DNS }}
       username: ${{ secrets.USERNAME }}
       key: ${{ secrets.SSH_KEY }}
-      script: |
-        docker-compose build
-        docker-compose restart
+      script: docker-compose build
