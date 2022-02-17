@@ -14,9 +14,6 @@ jobs:
     
     - name: Build the docker_compose
       run: docker-compose up -d --build
-      
-    - name: Buid the application
-      run: docker-compose exec -T kijiji_clone npm run build
 
   Deploy:
     needs: build
