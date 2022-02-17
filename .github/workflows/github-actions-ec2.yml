@@ -28,14 +28,10 @@ jobs:
             USER_NAME : ${{ secrets.USER_NAME  }}
             
         run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
-          
-            #Now we have got the access of EC2 and we will start the deploy .
             cd /home/ubuntu/kijiji_clone &&
             git checkout main &&
             git fetch --all &&
             git reset --hard origin/main &&
             git pull origin main &&
             docker-compose -f docker-compose.yml up -d --build 
-          '
+          
