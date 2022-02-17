@@ -21,4 +21,4 @@ jobs:
         TARGET:  /home/ubuntu/kijiji_clone
       command: |
             docker-compose build
-            docker-compose up
+            docker-compose restart
