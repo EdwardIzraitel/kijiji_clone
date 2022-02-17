@@ -26,4 +26,7 @@ jobs:
         host: ${{ secrets.HOST_DNS }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_KEY }}
-        script: docker-compose build
+        script: |
+          cd kijiji_clone/
+          docker-compose build
+          docker-compose up
