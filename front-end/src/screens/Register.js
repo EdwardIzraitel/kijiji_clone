@@ -22,7 +22,7 @@ function Register() {
             return
         }
         else{
-            axios.post('http://ec2-15-223-121-180.ca-central-1.compute.amazonaws.com/api/register',{
+            axios.post('http://ec2-35-183-199-25.ca-central-1.compute.amazonaws.com/api/register',{
                 username: username,
                 password: password
             })
