@@ -19,9 +19,6 @@ jobs:
         REMOTE_HOST: ${{ secrets.HOST_DNS }}
         REMOTE_USER: ${{ secrets.USERNAME }}
         TARGET:  /home/ubuntu/kijiji_clone
-      command: |
-            docker-compose build
-            docker-compose restart
 
     - name: multiple command
       uses: appleboy/ssh-action@master
