@@ -15,18 +15,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      # Initialize Node.js
-      - name: Install Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      # Install project dependencies, test and build
-      - name: Install dependencies
-        run: npm install
-      - name: Run build
-        run: npm run build
+      
+      - name: Build docker-compose
+        run: docker-compose up -d --build
 
   deploy:
     name: CD Pipeline
@@ -44,17 +35,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # Initialize Node.js
-      - name: Install Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      # Install project dependencies and build
-      - name: Install dependencies
-        run: npm install
-      - name: Run build
-        run: npm run build
+      - name: Build docker-compose
+        run: docker-compose up -d --build
 
       # Install AWS CLI 2
       - name: Install AWS CLI 2
