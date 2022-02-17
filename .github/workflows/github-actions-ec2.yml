@@ -28,5 +28,6 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         script: |
           cd kijiji_clone/
+          git pull
           docker-compose build
           docker-compose restart
