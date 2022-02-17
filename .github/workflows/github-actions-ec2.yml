@@ -1,0 +1,19 @@
+name: Push-to-EC2
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+  steps:
+    - names: Checkout the files
+      uses: actions/checkout@v2
+    - name: Deploy to server 1
+      env: 
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+        REMOTE_HOST: ${{ secrets.HOST_DNS }}
+        REMOTE_USER: ${ { secrets.USERNAME }}
+        TARGET:  /home/ubuntu/kijiji_clone
