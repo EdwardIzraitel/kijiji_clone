@@ -29,4 +29,4 @@ jobs:
         script: |
           cd kijiji_clone/
           docker-compose build
-          docker-compose up
+          docker-compose restart
