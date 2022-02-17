@@ -1,0 +1,18 @@
+name: Launching Bijiji
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+  - name: Execute SSH commmands on remote server
+    uses: JimCronqvist/action-ssh@master
+    env:
+      NAME: "Root"
+    with:
+      hosts: 'ec2-3-96-193-149.ca-central-1.compute.amazonaws.com user@domain2.com:222'
+      privateKey: ${{ secrets.SSH_KEY }}
+      debug: false
+      command: |
+        ls -lah
+        echo "I am $NAME"
