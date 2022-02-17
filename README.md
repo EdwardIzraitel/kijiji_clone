@@ -2,7 +2,7 @@
  
 To run this app locally please run: docker compose up --build  
 Note that .env file is not included, follow .env.example in /back-end for format  
-Head to http://ec2-3-96-193-149.ca-central-1.compute.amazonaws.com/ to use.  
+Head to http://ec2-35-183-199-25.ca-central-1.compute.amazonaws.com/ to use.  
 
 Test account:  
 testaccount  
