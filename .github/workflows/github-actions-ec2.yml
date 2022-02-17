@@ -8,13 +8,14 @@ jobs:
   deploy:
     name: Deploy to EC2
     runs-on: ubuntu-latest
-  steps:
+
+    steps:
     - name: Checkout the files
       uses: actions/checkout@v2
-      
+
     - name: Deploy to server 1
       uses: easingthemes/ssh-deploy@main
-      env: 
+      env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
         REMOTE_HOST: ${{ secrets.HOST_DNS }}
         REMOTE_USER: ${ { secrets.USERNAME }}
