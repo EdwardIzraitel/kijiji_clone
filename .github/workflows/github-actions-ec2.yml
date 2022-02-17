@@ -9,7 +9,7 @@ jobs:
     name: Deploy to EC2
     runs-on: ubuntu-latest
   steps:
-    - names: Checkout the files
+    - name: Checkout the files
       uses: actions/checkout@v2
     - name: Deploy to server 1
       env: 
