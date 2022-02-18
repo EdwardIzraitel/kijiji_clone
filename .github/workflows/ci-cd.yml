@@ -6,18 +6,18 @@ on:
       - main
 
 jobs:
-  # buildAndTest:
-  #   name: CI Pipeline
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       node-version: ['12.x']
+  buildAndTest:
+    name: CI Pipeline
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['12.x']
 
-  #   steps:
-  #     - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
       
-  #     - name: Build docker-compose
-  #       run: docker-compose up -d --build
+      - name: Build docker-compose
+        run: docker-compose build
 
   deploy:
     name: CD Pipeline
