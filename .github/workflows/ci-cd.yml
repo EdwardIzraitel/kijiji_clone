@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: '14.x'
+        node-version: ['14.x']
 
     steps:
       - uses: actions/checkout@v2
@@ -24,8 +24,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: '14.x'
-        appname: 'new-bijiji-deploy'
+        node-version: ['14.x']
+        appname: ['new-bijiji-deploy']
         deploy-group: ['main']
         s3-bucket: ['awss-codedeploy-deployments']
         # s3-filename: ['main-aws-codedeploy-${{ github.sha }}']
