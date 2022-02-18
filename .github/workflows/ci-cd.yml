@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: ['12.x']
+        node-version: '14.x'
 
     steps:
       - uses: actions/checkout@v2
@@ -24,26 +24,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8]
-        node-version: ['12.x']
-        appname: ['new-bijiji-deploy']
+        node-version: '14.x'
+        appname: 'new-bijiji-deploy'
         deploy-group: ['main']
         s3-bucket: ['awss-codedeploy-deployments']
-        s3-filename: ['main-aws-codedeploy-${{ github.sha }}']
+        # s3-filename: ['main-aws-codedeploy-${{ github.sha }}']
 
     needs: buildAndTest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Build docker-compose
-        run: docker-compose up -d --build
-
-      # Install AWS CLI 2
-      - name: Install AWS CLI 2
-        run: |
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-          unzip awscliv2.zip
-          sudo ./aws/install --update
+      - name: Checkout
+        uses: actions/checkout@v2
 
       # Configure AWS credentials
       - name: Configure AWS credentials
@@ -53,22 +43,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ca-central-1
 
-      # Deploy push to AWS S3
-      - name: AWS Deploy push
-        run: |
-          aws deploy push \
-          --application-name ${{ matrix.appname }} \
-          --description "This is a revision for the ${{ matrix.appname }}-${{ github.sha }}" \
-          --ignore-hidden-files \
-          --s3-location s3://${{ matrix.s3-bucket }}/${{ matrix.s3-filename }}.zip \
-          --source .
-
       # Create deployment to CodeDeploy
       - name: AWS Create Deployment
-        run: |
+        run: /
           aws deploy create-deployment \
            --application-name ${{ matrix.appname }} \
            --deployment-config-name CodeDeployDefault.OneAtATime \
            --deployment-group-name ${{ matrix.deploy-group }} \
-           --file-exists-behavior OVERWRITE \
-           --s3-location bucket=${{ matrix.s3-bucket }},key=${{ matrix.s3-filename }}.zip,bundleType=zip \
+           --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
+          #  --file-exists-behavior OVERWRITE \
+          #  --s3-location bucket=${{ matrix.s3-bucket }},key=${{ matrix.s3-filename }}.zip,bundleType=zip \
