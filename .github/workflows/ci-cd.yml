@@ -26,7 +26,7 @@ jobs:
       matrix:
         python-version: [3.8]
         node-version: ['12.x']
-        appname: ['kijiji_clone']
+        appname: ['new-bijiji-deploy']
         deploy-group: ['main']
         s3-bucket: ['awss-codedeploy-deployments']
         s3-filename: ['main-aws-codedeploy-${{ github.sha }}']
