@@ -4,7 +4,7 @@ ADD package.json /package.json
 
 ENV NODE_PATH=/node_modules
 ENV PATH=$PATH:/node_modules/.bin
-RUN npm install --force
+RUN npm install 
 RUN npm rebuild node-sass
 
 WORKDIR /app
