@@ -3,14 +3,11 @@ os: linux
 files:
   - source: /
     destination: /home/ubuntu/kijiji_clone
-permissions:
-  - object: /home/ubuntu
-    owner: ubuntu
-    group: ubuntu
-    type:
-      - directory
-      - file
 hooks:
+  ApplicationStop:
+    - location: scripts/application_stop.sh
+      timeout: 300
+      runs: ubuntu
   ApplicationStart:
     - location: scripts/reload-pm2.sh
       timeout: 300
