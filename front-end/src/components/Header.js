@@ -30,7 +30,7 @@ function Header() {
     <Wrapper>
         <HeaderWrap>
             <TextWrap>
-                <Title onClick={homePage}>Bijiji</Title>   
+                <Title onClick={homePage}>pipipi</Title>   
                 <input
                 style={{width: "450px", height:"25px" }}
                 type="text"
