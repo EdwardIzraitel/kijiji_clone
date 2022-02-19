@@ -4,7 +4,7 @@ import { TextField } from '@material-ui/core'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import { fetchUser } from '../Auth'
-
+import host from '../global';
 function NewPost() {
     let navigate = useNavigate()
 
@@ -72,7 +72,7 @@ function NewPost() {
             formData.append('username', fetchUser())
             axios({
                 method: "post",
-                url: "http://ec2-35-183-199-25.ca-central-1.compute.amazonaws.com/api/newPost",
+                url: `${host}/api/newPost`,
                 data: formData,
                 headers: { "Content-Type": "multipart/form-data" },
             })

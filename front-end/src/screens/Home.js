@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux'
 import {selectFilter, changeFilter} from '../features/filterSlicer'
 import { SpinnerCircular } from 'spinners-react';
+import host from '../global'
 
 function Home() {
   const [posts, setPosts] = useState([{}])
@@ -14,7 +15,7 @@ function Home() {
   const dispatch = useDispatch()
 
   useEffect(()=>{
-    axios.get('http://ec2-35-183-199-25.ca-central-1.compute.amazonaws.com/api/posts')
+    axios.get(`${host}/api/posts`)
     .then(res=>{
       setPosts(res.data)
       cLoading(false)
@@ -73,5 +74,6 @@ const PostingWrapper = styled.section`
 margin-left:auto;
 margin-right:auto;
 margin-top:20px;
-min-width:min(80%,100vh);
+// min-width:min(50%,100vh);
+width: min(95%,110vh);
 `

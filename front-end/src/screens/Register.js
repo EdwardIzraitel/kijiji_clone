@@ -5,7 +5,7 @@ import axios from 'axios'
 import { setToken, setUser } from '../Auth'
 import { useNavigate } from "react-router-dom";
 import { useAlert } from 'react-alert'
-
+import host from '../global'
 
 function Register() {
     const [username, changeUsername] = useState('')
@@ -22,7 +22,7 @@ function Register() {
             return
         }
         else{
-            axios.post('http://ec2-35-183-199-25.ca-central-1.compute.amazonaws.com/api/register',{
+            axios.post(`${host}/api/register`,{
                 username: username,
                 password: password
             })
