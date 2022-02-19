@@ -112,6 +112,7 @@ def register_user(user:User):
 @app.post("/api/login")
 def user_login(user: User):
     res = find_user(user.username)
+    print(res)
     if res!=None:
         data = jsonable_encoder(user)
         if data['username'] == res['username'] and data['password'] == res['password']:
