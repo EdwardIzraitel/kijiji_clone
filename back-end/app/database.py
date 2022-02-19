@@ -9,9 +9,7 @@ from schemas.post_schema import posts_serializer
 load_dotenv()
 MONGODB_KEY = os.getenv("MONGODB_KEY")
 
-# client = MongoClient('mongodb://root:example@mongo:27017')
-# client = MongoClient("mongodb+srv://edward:{MONGODB_KEY}@bijiji.efe37.mongodb.net/bijiji?retryWrites=true&w=majority")
-client = MongoClient("mongodb+srv://edward:{MONGODB_KEY}@bijiji.efe37.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://edward:{MONGODB_KEY}@bijiji.efe37.mongodb.net/Bijiji?retryWrites=true&w=majority")
 # client = MotorClient(
 #     'mongodb://root:example@mongo:27017')
 # client.get_io_loop = asyncio.get_running_loop
