@@ -6,7 +6,7 @@ services:
       restart: unless-stopped
       environment:
         MONGO_INITDB_ROOT_USERNAME: edward
-        MONGO_INITDB_ROOT_PASSWORD: r11KGkJMGzNLYncE
+        MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
   mongo-express:
     image: mongo-express
     restart: unless-stopped

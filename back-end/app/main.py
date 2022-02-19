@@ -1,5 +1,5 @@
 from multiprocessing import dummy
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 import os
 from fastapi import FastAPI, HTTPException, UploadFile, Depends, Form
 from model import Post, User
@@ -10,8 +10,7 @@ from fastapi.encoders import jsonable_encoder
 import boto3
 from botocore.client import BaseClient
 from botocore.exceptions import ClientError
-
-load_dotenv()
+load_dotenv(find_dotenv())
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM")
 
@@ -84,11 +83,18 @@ async def delete_post(title):
          return "Successfully deleted post"
      raise HTTPException(404,"No post with {title} to delete")
 
+
+
+
+
+
 #========USERS=====
 # @app.get("/api/login")
 # def get_users():
 #     response = fetch_all_users()
 #     return response
+
+
 
 @app.post("/api/register")
 def register_user(user:User):
@@ -101,9 +107,12 @@ def register_user(user:User):
     raise HTTPException(404,"Username exists, try a different one")
 
 
+
+
 @app.post("/api/login")
 def user_login(user: User):
     res = find_user(user.username)
+    print(res)
     if res!=None:
         data = jsonable_encoder(user)
         if data['username'] == res['username'] and data['password'] == res['password']:
