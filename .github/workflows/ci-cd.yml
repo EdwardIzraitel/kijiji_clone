@@ -3,7 +3,7 @@ name: CI/CD
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   buildAndTest:
@@ -28,8 +28,7 @@ jobs:
         appname: ['new-bijiji-deploy']
         deploy-group: ['main']
         s3-bucket: ['awss-codedeploy-deployments']
-        # s3-filename: ['main-aws-codedeploy-${{ github.sha }}']
-
+        
     needs: buildAndTest
     steps:
       - name: Checkout
