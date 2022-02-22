@@ -1,5 +1,5 @@
 from multiprocessing import dummy
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
 import os
 from fastapi import FastAPI, HTTPException, UploadFile, Depends, Form
 from model import Post, User
@@ -10,7 +10,7 @@ from fastapi.encoders import jsonable_encoder
 import boto3
 from botocore.client import BaseClient
 from botocore.exceptions import ClientError
-load_dotenv(find_dotenv())
+load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM")
 
