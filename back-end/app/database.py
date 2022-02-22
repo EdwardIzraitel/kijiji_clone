@@ -12,7 +12,7 @@ client = MongoClient("mongodb+srv://edward:"+os.getenv("MONGODB_KEY")+"@bijiji.e
 # client = MotorClient(
 #     'mongodb://root:example@mongo:27017')
 # client.get_io_loop = asyncio.get_running_loop
-dbDev = client.dev
+dbDev = client.prod
 postCollection = dbDev["posts"]
 userCollection = dbDev["users"]
 # database = client.Postings

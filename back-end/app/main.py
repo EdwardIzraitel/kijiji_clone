@@ -10,9 +10,7 @@ from fastapi.encoders import jsonable_encoder
 import boto3
 from botocore.client import BaseClient
 from botocore.exceptions import ClientError
-load_dotenv(find_dotenv())
-SECRET_KEY = os.getenv("SECRET_KEY")
-ALGORITHM = os.getenv("ALGORITHM")
+load_dotenv()
 
 def s3_auth()->BaseClient:
     s3_client = boto3.client(
