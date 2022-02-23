@@ -9,12 +9,9 @@ from schemas.post_schema import posts_serializer
 load_dotenv()
 
 client = MongoClient("mongodb+srv://edward:"+os.getenv("MONGODB_KEY")+"@bijiji.efe37.mongodb.net/Bijiji?retryWrites=true&w=majority")
-# client = MotorClient(
-#     'mongodb://root:example@mongo:27017')
-# client.get_io_loop = asyncio.get_running_loop
-dbDev = client.prod
-postCollection = dbDev["posts"]
-userCollection = dbDev["users"]
+db = client.prod
+postCollection = db["posts"]
+userCollection = db["users"]
 # database = client.Postings
 # collection = database["post"]
 # collection_user = database["users"]

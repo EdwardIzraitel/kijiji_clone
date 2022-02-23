@@ -15,7 +15,7 @@ function Home() {
   const dispatch = useDispatch()
 
   useEffect(()=>{
-    axios.get(`http://ec2-3-99-163-219.ca-central-1.compute.amazonaws.com/api/posts`)
+    axios.get(`${host}/api/posts`)
     .then(res=>{
       setPosts(res.data)
       cLoading(false)

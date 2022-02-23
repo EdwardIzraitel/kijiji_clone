@@ -27,7 +27,7 @@ function NewPost() {
     const changeData = (e)=>{
         const newData = {...postData}
         const onlyNumberRegex = /[^0-9]/g
-        if(e.target.id=="price"){
+        if(e.target.id==="price"){
             newData[e.target.id] = e.target.value.replace(onlyNumberRegex,"")
         }
         else{
@@ -52,13 +52,13 @@ function NewPost() {
 
     const uploadPost = () =>{
         const newError = {...error}
-        if(postData.title.length==0)
+        if(postData.title.length===0)
             newError["titleError"] = "Enter a title"
-        if(postData.desc.length==0)
+        if(postData.desc.length===0)
             newError["descError"] = "Enter a description"
-        if(postData.price.length==0)
+        if(postData.price.length===0)
             newError["priceError"] = "Enter a price"
-        if(selectedFile==null)
+        if(selectedFile===null)
             cImgError("Please upload an image")
 
         changeError(newError)
@@ -139,7 +139,6 @@ font-size: calc(10px + 2vmin);
 `
 const Text = styled.p`
 color:white;
-// textAlign:center;
 `;
 const InfoFields = styled.section`
 align-self: center;
